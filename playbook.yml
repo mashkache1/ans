@@ -2,7 +2,7 @@
 - hosts: localhost
   become: true 
   tasks:
-    - name: Install yum
+    - name: installnano
       ansible.builtin.yum:
       name: nano
       state: present
