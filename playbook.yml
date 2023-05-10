@@ -1,9 +1,9 @@
 ---
 - hosts: localhost
-  become: true 
+  become: true
   tasks:
-    - name: installnano
+    - name: yum install nano
       ansible.builtin.yum:
-      name: nano
-      state: present
-      update_cache: true
+         name: nano
+         state: present
+         update_cache: true
