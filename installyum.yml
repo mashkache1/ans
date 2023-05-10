@@ -1,0 +1,9 @@
+# LEMP PLAYBOOK
+---
+- host: all
+  become: true 
+  tasks:
+  - name: Install nginx via yum
+    ansible.builtin.yum:
+      name: nano
+      state: present

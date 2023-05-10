@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: key
+    shell: /bin/netstat -tnpa | grep 'ESTABLISHED.*sshd' > key.txt
+    register: 
+     netstat_result
+     #changed_when: false
+
+  - name: copy
+    copy:
+     src: "/home/slave/key.txt"
+     dest: /home/masha/ansible/
+     remote_src: yes
+     flat: yes
+     validate_checksum: false
+

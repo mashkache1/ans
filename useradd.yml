@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  vars:
+    username: testuser
+    password_file: /home/masha/ansible/password
+  tasks:
+    - name: Create user
+      ansible.builtin.user:
+        name: "{{username}}"
+        create_home: yes
+        shell: /bin/bash
+    - name: Add user to wheel group
+      user:
+        name: "{{username}}"
+        groups: wheel
+        append: yes
+    - name: Set user passwd from file
+      user:
+        name: "{{username}}"
+        password: "{{lookup ('file', password_file)}}"
+    - name: id_rsa.pub
+      authorized_key:
+        user: testuser
+        state: present
+        key: "{{ lookup('file', '/home/masha/.ssh/id_rsa.pub') }}"
+

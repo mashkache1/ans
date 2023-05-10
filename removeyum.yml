@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install nginx via yum
+      ansible.builtin.yum:
+        name: nginx
+        state: latest
+        update_cache: true
+    - name: Delete /var/www/html folder
+      ansible.builtin.file:
+        path: /var/www/html
+        state: absent
